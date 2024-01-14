@@ -5,10 +5,10 @@ async function login(req, res) {
 
   try {
     if (!secretKey) {
-      return res.status(400).json({ error: "Secret key is required" });
+      return res.json({ error: "Secret key is required" });
     }
     if (!branchName) {
-      return res.status(400).json({ error: "Branch name is not defined" });
+      return res.json({ error: "Branch name is not defined" });
     }
 
     // Find the admin credentials in the database
@@ -19,7 +19,7 @@ async function login(req, res) {
 
     if (adminRecord) {
       // Authentication successful
-      res.status(200).json({
+      res.json({
         message: "Login successful",
         data: {
           branchName: adminRecord.branchName,
@@ -27,11 +27,11 @@ async function login(req, res) {
       });
     } else {
       // Authentication failed
-      res.status(401).json({ message: "Invalid credentials" });
+      res.json({ message: "Invalid credentials" });
     }
   } catch (error) {
     console.error("Error during authentication:", error);
-    res.status(500).json({ message: "Internal server error" });
+    res.json({ message: "Internal server error" });
   }
 }
 
