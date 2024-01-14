@@ -5,10 +5,10 @@ async function login(req, res) {
 
   try {
     if (!secretKey) {
-      return res.json({ error: "Secret key is required" });
+      return res.json({ message: "Secret key is required" });
     }
     if (!branchName) {
-      return res.json({ error: "Branch name is not defined" });
+      return res.json({ message: "Branch name is not defined" });
     }
 
     // Find the admin credentials in the database
