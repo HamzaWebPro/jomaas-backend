@@ -39,6 +39,11 @@ const PizzaSchema = new mongoose.Schema({
   branch:{
     type:String
   },
+  isAvailable: {
+    type: String,
+    enum: ['not-available', 'available',],
+    default: 'available'
+  },
   createdAt: {
     type: Date,
     default: Date.now,

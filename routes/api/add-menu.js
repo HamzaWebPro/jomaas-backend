@@ -1,5 +1,5 @@
 const express = require("express");
-const { createPizza, getPizza, deletePizza, updatePizza } = require("../../controllers/add-menu-items-controllers/Pizza");
+const { createPizza, getPizza, deletePizza, updatePizza, pizzaAvailableStatus } = require("../../controllers/add-menu-items-controllers/Pizza");
 const { createDonair, getDonairs, updateDonair, deleteDonair } = require("../../controllers/add-menu-items-controllers/Donair");
 
 const _ = express.Router();
@@ -10,6 +10,7 @@ _.post("/pizza", createPizza);
 _.get("/getpizza", getPizza);
 _.post("/updatepizza", updatePizza);
 _.post("/deletepizza", deletePizza);
+_.post("/pizzastatus",pizzaAvailableStatus)
 // pizza end
 
 // donair  start

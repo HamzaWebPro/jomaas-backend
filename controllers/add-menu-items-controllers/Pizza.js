@@ -64,18 +64,35 @@ const updatePizza = async (req, res) => {
     const { id, updatedPizza } = req.body;
 
     // Find the pizza item by ID and update it
-    const updatedPizzaItem = await Pizza.findByIdAndUpdate(id, updatedPizza, { new: true });
+    const updatedPizzaItem = await Pizza.findByIdAndUpdate(id, updatedPizza, {
+      new: true,
+    });
 
     // If the pizza item was not found, it will return null
-    
 
     res.json({ message: "Your Pizza Item Successfully Updated!!" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
   }
-}
+};
 
+// is available showing
+const pizzaAvailableStatus = async (req, res) => {
+  try {
+    const { id, status } = req.body;
+    const updatedPizza = await Pizza.findByIdAndUpdate(id, { isAvailable: status }, { new: true });
+
+    if (!updatedPizza) {
+      return res.status(404).json({ message: "Pizza not found" });
+    }
+
+    res.json({ message: "Your Product Status Updated" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
 
 
 //   delete pizza
@@ -94,8 +111,9 @@ const deletePizza = async (req, res) => {
 };
 
 module.exports = {
+  pizzaAvailableStatus,
   createPizza,
   getPizza,
   deletePizza,
-  updatePizza
+  updatePizza,
 };
