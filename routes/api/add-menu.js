@@ -1,6 +1,6 @@
 const express = require("express");
 const { createPizza, getPizza, deletePizza, updatePizza, pizzaAvailableStatus } = require("../../controllers/add-menu-items-controllers/Pizza");
-const { createDonair, getDonairs, updateDonair, deleteDonair } = require("../../controllers/add-menu-items-controllers/Donair");
+const { createDonair, getDonairs, updateDonair, deleteDonair, donairAvailableStatus } = require("../../controllers/add-menu-items-controllers/Donair");
 
 const _ = express.Router();
 
@@ -18,6 +18,7 @@ _.post("/donair", createDonair);
 _.get("/getdonair", getDonairs);
 _.post("/updatedonair", updateDonair);
 _.post("/deletedonair", deleteDonair);
+_.post("/donairstatus",donairAvailableStatus)
 // donair end
 
 module.exports = _;

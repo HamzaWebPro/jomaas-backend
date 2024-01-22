@@ -69,6 +69,23 @@ const getDonairs = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+// is available showing
+const donairAvailableStatus = async (req, res) => {
+  try {
+    const { id, status } = req.body;
+    const updatedDonair = await Donair.findByIdAndUpdate(id, { isAvailable: status }, { new: true });
+
+    if (!updatedDonair) {
+      return res.status(404).json({ message: "Donair not found" });
+    }
+
+    res.json({ message: "Your Product Status Updated" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
 
 // Controller function to delete a Donair item
 const deleteDonair = async (req, res) => {
@@ -90,4 +107,5 @@ module.exports = {
   updateDonair,
   getDonairs,
   deleteDonair,
+  donairAvailableStatus
 };

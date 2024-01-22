@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 // Define the schema
-const  DonairSchema = new mongoose.Schema({
+const DonairSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -14,22 +14,29 @@ const  DonairSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  toppings: [{
-    type: String,
-    required: true,
-  }],
+  toppings: [
+    {
+      type: String,
+      required: true,
+    },
+  ],
   prices: {
     type: Number,
-      required: true,
+    required: true,
   },
-  branch:{
-    type:String
+  branch: {
+    type: String,
+  },
+  isAvailable: {
+    type: String,
+    enum: ["not-available", "available"],
+    default: "available",
   },
   createdAt: {
     type: Date,
     default: Date.now,
   },
- 
+
   // Add any additional properties you may need for pizza items
 });
 
