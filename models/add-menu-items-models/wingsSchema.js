@@ -14,6 +14,9 @@ const WingsSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  pieces:{
+    type:Number
+  },
   tossedIn: [
     {
       type: String,

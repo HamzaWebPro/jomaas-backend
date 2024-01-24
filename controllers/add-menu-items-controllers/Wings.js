@@ -3,9 +3,9 @@ const Wings = require("../../models/add-menu-items-models/wingsSchema");
 // Controller function to save a wings item
 const createWings = async (req, res) => {
   try {
-    const { name, description, image, tossedIn, prices,branch } = req.body;
+    const { name, description, image, tossedIn, prices,branch,pieces } = req.body;
     // Check if required fields are empty
-    if (!name || !description || !image || !tossedIn || !prices) {
+    if (!name || !description || !image || !tossedIn || !prices || !pieces) {
       return res.json({ message: "Please provide all required fields." });
     }
 
@@ -14,6 +14,7 @@ const createWings = async (req, res) => {
       name,
       description,
       image,
+      pieces,
       tossedIn,
       prices,
       branch
