@@ -44,12 +44,14 @@ const PizzaSchema = new mongoose.Schema({
     enum: ['not-available', 'available',],
     default: 'available'
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
+  // createdAt: {
+  //   type: Date,
+  //   default: Date.now,
+  // },
  
   // Add any additional properties you may need for pizza items
+},{
+  timestamps:true
 });
 
 // Create and export the model
