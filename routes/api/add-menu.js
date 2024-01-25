@@ -16,6 +16,7 @@ const {
 const { createWings, getWings, updateWings, deleteWings, wingsAvailableStatus } = require("../../controllers/add-menu-items-controllers/Wings");
 const { createPoutine, updatePoutine, deletePoutine, poutineAvailableStatus, getPoutine } = require("../../controllers/add-menu-items-controllers/poutine");
 const { createChicken, getChicken, updateChicken, deleteChicken, chickenAvailableStatus } = require("../../controllers/add-menu-items-controllers/Chicken");
+const { createPanzarotti, getPanzarotti, updatePanzarotti, deletePanzarotti, panzarottiAvailableStatus } = require("../../controllers/add-menu-items-controllers/Panzarotti");
 
 const _ = express.Router();
 
@@ -58,5 +59,13 @@ _.post("/updatechicken", updateChicken);
 _.post("/deletechicken", deleteChicken);
 _.post("/chickenstatus", chickenAvailableStatus);
 // chickens end
+
+// panzarotti routes
+_.post("/panzarotti", createPanzarotti);
+_.get("/getpanzarotti", getPanzarotti);
+_.post("/updatepanzarotti", updatePanzarotti);
+_.post("/deletepanzarotti", deletePanzarotti);
+_.post("/panzarottistatus", panzarottiAvailableStatus);
+// panzarotti routes end
 
 module.exports = _;
