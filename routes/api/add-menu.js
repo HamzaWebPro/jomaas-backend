@@ -14,6 +14,7 @@ const {
   donairAvailableStatus,
 } = require("../../controllers/add-menu-items-controllers/Donair");
 const { createWings, getWings, updateWings, deleteWings, wingsAvailableStatus } = require("../../controllers/add-menu-items-controllers/Wings");
+const { createPoutine, updatePoutine, deletePoutine, poutineAvailableStatus, getPoutine } = require("../../controllers/add-menu-items-controllers/poutine");
 
 const _ = express.Router();
 
@@ -40,5 +41,13 @@ _.post("/updatewings", updateWings);
 _.post("/deletewings", deleteWings);
 _.post("/wingsstatus", wingsAvailableStatus);
 // wings end
+
+// poutines start
+_.post("/poutines", createPoutine);
+_.get("/getpoutines", getPoutine);
+_.post("/updatepoutine", updatePoutine);
+_.post("/deletepoutine", deletePoutine);
+_.post("/poutinestatus", poutineAvailableStatus);
+// poutines end
 
 module.exports = _;

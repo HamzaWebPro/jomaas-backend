@@ -2,12 +2,21 @@ const Donair = require("../../models/add-menu-items-models/donairSchema")
 
 // Controller function to create a Donair item
 const createDonair = async (req, res) => {
+  const emptySpace = /\S+/;
   try {
     const { name, description, image, toppings, prices, branch } = req.body;
 
     // Check if required fields are empty
     if (!name || !description || !image || !toppings || !prices) {
       return res.json({ message: "Please provide all required fields." });
+    }
+    // checking white space
+    if (
+      !emptySpace.test(name) ||
+      !emptySpace.test(description) ||
+      !emptySpace.test(image)
+    ) {
+      return res.json({ message: "Whitespace is not allowed" });
     }
 
     // Create a new Donair instance

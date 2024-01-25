@@ -2,11 +2,20 @@ const Wings = require("../../models/add-menu-items-models/wingsSchema");
 
 // Controller function to save a wings item
 const createWings = async (req, res) => {
+  const emptySpace = /\S+/;
   try {
     const { name, description, image, tossedIn, prices,branch,pieces } = req.body;
     // Check if required fields are empty
     if (!name || !description || !image || !tossedIn || !prices || !pieces) {
       return res.json({ message: "Please provide all required fields." });
+    }
+    // checking white space
+    if (
+      !emptySpace.test(name) ||
+      !emptySpace.test(description) ||
+      !emptySpace.test(image)
+    ) {
+      return res.json({ message: "Whitespace is not allowed" });
     }
 
     // Create a new Wings instance
@@ -65,6 +74,7 @@ const updateWings = async (req, res) => {
 
 // Is available showing
 const wingsAvailableStatus = async (req, res) => {
+  
   try {
     const { id, status } = req.body;
     const updatedWings = await Wings.findByIdAndUpdate(

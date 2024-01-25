@@ -2,12 +2,21 @@ const Pizza = require("../../models/add-menu-items-models/pizzaSchema");
 
 // Controller function to save a pizza item
 const createPizza = async (req, res) => {
+  const emptySpace = /\S+/;
   try {
     const { name, description, image, toppings, prices, branch } = req.body;
 
     // Check if required fields are empty
     if (!name || !description || !image || !toppings || !prices) {
       return res.json({ message: "Please provide all required fields." });
+    }
+    // checking white space
+    if (
+      !emptySpace.test(name) ||
+      !emptySpace.test(description) ||
+      !emptySpace.test(image)
+    ) {
+      return res.json({ message: "Whitespace is not allowed" });
     }
 
     // Check if prices for different sizes are defined
@@ -81,7 +90,11 @@ const updatePizza = async (req, res) => {
 const pizzaAvailableStatus = async (req, res) => {
   try {
     const { id, status } = req.body;
-    const updatedPizza = await Pizza.findByIdAndUpdate(id, { isAvailable: status }, { new: true });
+    const updatedPizza = await Pizza.findByIdAndUpdate(
+      id,
+      { isAvailable: status },
+      { new: true }
+    );
 
     if (!updatedPizza) {
       return res.status(404).json({ message: "Pizza not found" });
@@ -93,7 +106,6 @@ const pizzaAvailableStatus = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
-
 
 //   delete pizza
 const deletePizza = async (req, res) => {
