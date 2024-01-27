@@ -13,12 +13,55 @@ const {
   deleteDonair,
   donairAvailableStatus,
 } = require("../../controllers/add-menu-items-controllers/Donair");
-const { createWings, getWings, updateWings, deleteWings, wingsAvailableStatus } = require("../../controllers/add-menu-items-controllers/Wings");
-const { createPoutine, updatePoutine, deletePoutine, poutineAvailableStatus, getPoutine } = require("../../controllers/add-menu-items-controllers/poutine");
-const { createChicken, getChicken, updateChicken, deleteChicken, chickenAvailableStatus } = require("../../controllers/add-menu-items-controllers/Chicken");
-const { createPanzarotti, getPanzarotti, updatePanzarotti, deletePanzarotti, panzarottiAvailableStatus } = require("../../controllers/add-menu-items-controllers/Panzarotti");
-const { createGarlicFingers, getGarlicFingers, updateGarlicFingers, deleteGarlicFingers, garlicFingersAvailableStatus } = require("../../controllers/add-menu-items-controllers/garlicFingers");
-const { createBurger, getBurger, updateBurger, deleteBurger, burgerAvailableStatus } = require("../../controllers/add-menu-items-controllers/burger");
+const {
+  createWings,
+  getWings,
+  updateWings,
+  deleteWings,
+  wingsAvailableStatus,
+} = require("../../controllers/add-menu-items-controllers/Wings");
+const {
+  createPoutine,
+  updatePoutine,
+  deletePoutine,
+  poutineAvailableStatus,
+  getPoutine,
+} = require("../../controllers/add-menu-items-controllers/poutine");
+const {
+  createChicken,
+  getChicken,
+  updateChicken,
+  deleteChicken,
+  chickenAvailableStatus,
+} = require("../../controllers/add-menu-items-controllers/Chicken");
+const {
+  createPanzarotti,
+  getPanzarotti,
+  updatePanzarotti,
+  deletePanzarotti,
+  panzarottiAvailableStatus,
+} = require("../../controllers/add-menu-items-controllers/Panzarotti");
+const {
+  createGarlicFingers,
+  getGarlicFingers,
+  updateGarlicFingers,
+  deleteGarlicFingers,
+  garlicFingersAvailableStatus,
+} = require("../../controllers/add-menu-items-controllers/garlicFingers");
+const {
+  createBurger,
+  getBurger,
+  updateBurger,
+  deleteBurger,
+  burgerAvailableStatus,
+} = require("../../controllers/add-menu-items-controllers/burger");
+const {
+  createSalad,
+  getSalads,
+  updateSalad,
+  deleteSalad,
+  saladAvailableStatus,
+} = require("../../controllers/add-menu-items-controllers/salads");
 
 const _ = express.Router();
 
@@ -86,5 +129,12 @@ _.post("/deleteburger", deleteBurger);
 _.post("/burgerstatus", burgerAvailableStatus);
 // Burger routes end
 
+// Salad routes
+_.post("/salad", createSalad);
+_.get("/getsalads", getSalads);
+_.post("/updatesalad", updateSalad);
+_.post("/deletesalad", deleteSalad);
+_.post("/saladstatus", saladAvailableStatus);
+// Salad routes end
 
 module.exports = _;

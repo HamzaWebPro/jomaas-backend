@@ -5,10 +5,10 @@ const Burger = require("../../models/add-menu-items-models/burgerSchema");
 const createBurger = async (req, res) => {
   const emptySpace = /\S+/;
   try {
-    const { name, description, image, toppings, price, branch } = req.body;
+    const { name, description, image, toppings, prices, branch } = req.body;
 
     // Check if required fields are empty
-    if (!name || !description || !image || !toppings || !price) {
+    if (!name || !description || !image || !toppings || !prices) {
       return res.json({ message: "Please provide all required fields." });
     }
 
@@ -32,7 +32,7 @@ const createBurger = async (req, res) => {
       description,
       image,
       toppings,
-      price,
+      prices,
       branch
     });
 
