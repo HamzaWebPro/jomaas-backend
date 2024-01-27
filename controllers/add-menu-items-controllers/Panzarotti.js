@@ -14,6 +14,10 @@ const createPanzarotti = async (req, res) => {
    if (!comesWith || comesWith.length === 0) {
     return res.json({ message: "Please add at least one comes with item." });
   }
+   // check comes with
+   if (!toppings || toppings.length === 0) {
+    return res.json({ message: "Please add at least one toppings." });
+  }
 
 
     // checking white space
