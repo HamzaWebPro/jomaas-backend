@@ -17,6 +17,7 @@ const { createWings, getWings, updateWings, deleteWings, wingsAvailableStatus } 
 const { createPoutine, updatePoutine, deletePoutine, poutineAvailableStatus, getPoutine } = require("../../controllers/add-menu-items-controllers/poutine");
 const { createChicken, getChicken, updateChicken, deleteChicken, chickenAvailableStatus } = require("../../controllers/add-menu-items-controllers/Chicken");
 const { createPanzarotti, getPanzarotti, updatePanzarotti, deletePanzarotti, panzarottiAvailableStatus } = require("../../controllers/add-menu-items-controllers/Panzarotti");
+const { createGarlicFingers, getGarlicFingers, updateGarlicFingers, deleteGarlicFingers, garlicFingersAvailableStatus } = require("../../controllers/add-menu-items-controllers/garlicFingers");
 
 const _ = express.Router();
 
@@ -67,5 +68,13 @@ _.post("/updatepanzarotti", updatePanzarotti);
 _.post("/deletepanzarotti", deletePanzarotti);
 _.post("/panzarottistatus", panzarottiAvailableStatus);
 // panzarotti routes end
+
+// Garlic Fingers routes
+_.post("/garlicfingers", createGarlicFingers);
+_.get("/getgarlicfingers", getGarlicFingers);
+_.post("/updategarlicfingers", updateGarlicFingers);
+_.post("/deletegarlicfingers", deleteGarlicFingers);
+_.post("/garlicfingersstatus", garlicFingersAvailableStatus);
+// Garlic Fingers routes end
 
 module.exports = _;

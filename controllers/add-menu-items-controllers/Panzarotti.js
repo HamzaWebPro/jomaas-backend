@@ -10,6 +10,11 @@ const createPanzarotti = async (req, res) => {
     if (!description || !image || !toppings || !comesWith || !prices || !branch) {
       return res.json({ message: "Please provide all required fields." });
     }
+   // check comes with
+   if (!comesWith || comesWith.length === 0) {
+    return res.json({ message: "Please add at least one comes with item." });
+  }
+
 
     // checking white space
     if (

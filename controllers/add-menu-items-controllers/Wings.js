@@ -9,6 +9,10 @@ const createWings = async (req, res) => {
     if (!name || !description || !image || !tossedIn || !prices || !pieces) {
       return res.json({ message: "Please provide all required fields." });
     }
+    // check comes with
+    if (!tossedIn || tossedIn.length === 0) {
+      return res.json({ message: "Please add at least one Tossed in item." });
+    }
     // checking white space
     if (
       !emptySpace.test(name) ||

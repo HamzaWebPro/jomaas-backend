@@ -19,6 +19,10 @@ const createDonair = async (req, res) => {
       return res.json({ message: "Whitespace is not allowed" });
     }
 
+    if (!toppings || toppings.length === 0) {
+      return res.json({ message: "Please add at least one toppings." });
+    }
+
     // Create a new Donair instance
     const donair = new Donair({
       name,

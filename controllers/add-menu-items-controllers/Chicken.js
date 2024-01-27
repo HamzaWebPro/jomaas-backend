@@ -10,6 +10,10 @@ const createChicken = async (req, res) => {
     if (!name || !description || !image || !pieces || !prices) {
       return res.json({ message: "Please provide all required fields." });
     }
+    // Check if at least one topping is provided
+    if (!comesWith || comesWith.length === 0) {
+      return res.json({ message: "Please add at least one comes with item." });
+    }
 
     // Checking white space
     if (!emptySpace.test(name) || !emptySpace.test(description)) {
