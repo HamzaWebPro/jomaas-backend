@@ -21,7 +21,7 @@ const createPoutine = async (req, res) => {
     // Check if prices for different sizes are defined
     if (!prices.medium || !prices.large) {
       return res.json({
-        message: "Please provide prices for all pizza sizes.",
+        message: "Please provide prices for all poutine sizes.",
       });
     }
 

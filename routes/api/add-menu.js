@@ -62,6 +62,13 @@ const {
   deleteSalad,
   saladAvailableStatus,
 } = require("../../controllers/add-menu-items-controllers/salads");
+const {
+  createSpecialtyPasta,
+  getSpecialtyPastas,
+  updateSpecialtyPasta,
+  deleteSpecialtyPasta,
+  changeSpecialtyPastaStatus,
+} = require("../../controllers/add-menu-items-controllers/speciality-pasta");
 
 const _ = express.Router();
 
@@ -136,5 +143,13 @@ _.post("/updatesalad", updateSalad);
 _.post("/deletesalad", deleteSalad);
 _.post("/saladstatus", saladAvailableStatus);
 // Salad routes end
+
+// Specialty Pasta routes
+_.post("/specialtypasta", createSpecialtyPasta);
+_.get("/getspecialtypastas", getSpecialtyPastas);
+_.post("/updatespecialtypasta", updateSpecialtyPasta);
+_.post("/deletespecialtypasta", deleteSpecialtyPasta);
+_.post("/specialtypastastatus", changeSpecialtyPastaStatus);
+// Specialty Pasta routes end
 
 module.exports = _;
