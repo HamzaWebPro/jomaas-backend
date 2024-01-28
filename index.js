@@ -1,15 +1,23 @@
 require("dotenv").config();
-const express = require('express')
-const dbConnection = require('./config/dbConnection')
-const routes = require("./routes")
-var cors = require('cors')
-const app = express()
+const cors = require("cors");
+const express = require("express");
+const app = express();
+const dbConnection = require("./config/dbConnection");
+const notFoundMiddleware = require("./middleware/notFoundMiddleware");
+const routes = require("./routes");
 
-app.use(express.json())
-app.use(cors())
-dbConnection()
-app.use(routes)
+dbConnection();
 
+// Middlewares
+app.use(express.json());
+app.use(
+  cors({
+    origin: "*",
+    optionsSuccessStatus: 200,
+  })
+);
+app.use(routes);
+app.use(notFoundMiddleware);
 
-
-app.listen(8000)
+const port = process.env.PORT || 5000;
+app.listen(port, () => console.log(`SERVER IS RUNNING ON PORT ${port}`));
