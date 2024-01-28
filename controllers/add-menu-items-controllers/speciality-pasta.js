@@ -1,4 +1,4 @@
-const SpecialtyPasta = require("../../models/add-menu-items-models/specialtyPastaSchema");
+const SpecialtyPasta = require("../../models/add-menu-items-models/speciality-pastaSchema");
 
 // Controller function to save a specialty pasta item
 const createSpecialtyPasta = async (req, res) => {
@@ -63,13 +63,19 @@ const updateSpecialtyPasta = async (req, res) => {
     const { id, updatedSpecialtyPasta } = req.body;
 
     // Find the specialty pasta item by ID and update it
-    const updatedItem = await SpecialtyPasta.findByIdAndUpdate(id, updatedSpecialtyPasta, {
-      new: true,
-    });
+    const updatedItem = await SpecialtyPasta.findByIdAndUpdate(
+      id,
+      updatedSpecialtyPasta,
+      {
+        new: true,
+      }
+    );
 
     // If the specialty pasta item was not found, it will return null
     if (!updatedItem) {
-      return res.status(404).json({ message: "Specialty pasta item not found" });
+      return res
+        .status(404)
+        .json({ message: "Specialty pasta item not found" });
     }
 
     res.json({ message: "Your Specialty Pasta Item Successfully Updated!!" });
@@ -90,7 +96,9 @@ const changeSpecialtyPastaStatus = async (req, res) => {
     );
 
     if (!updatedSpecialtyPasta) {
-      return res.status(404).json({ message: "Specialty pasta item not found" });
+      return res
+        .status(404)
+        .json({ message: "Specialty pasta item not found" });
     }
 
     res.json({ message: "Your Specialty Pasta Item Status Updated" });
