@@ -1,14 +1,25 @@
-const express = require('express');
+const express = require("express");
+const _ = express.Router();
 const login = require("../../controllers/login");
-const { adminCredential } = require('../../controllers/adminCredential');
+const { adminCredential } = require("../../controllers/adminCredential");
+const {
+  userSignupController,
+  userVerificationController,
+  userLoginController,
+  userForgotPasswordController,
+  matchUserOtpController,
+  resetUserPasswordController,
+  allUsersController,
+} = require("../../controllers/userAuthControllers/userAuthControllers");
 
+_.post("/branchregister", adminCredential);
+_.post("/login", login);
+_.post("/usersignup", userSignupController);
+_.post("/userverify", userVerificationController);
+_.post("/userlogin", userLoginController);
+_.post("/userforgotpassword", userForgotPasswordController);
+_.post("/usermatchotp", matchUserOtpController);
+_.post("/userresetpassword", resetUserPasswordController);
+_.get("/allusers", allUsersController);
 
-const _ = express.Router()
-
-
-_.post("/branchregister",adminCredential)
-_.post("/login",login)
-
-
-
-module.exports = _ ;
+module.exports = _;
