@@ -16,7 +16,7 @@ const {
 } = require("../../utils/spaceValidator");
 
 const userSignupController = (req, res) => {
-  const { userName, email, password } = req.body;
+  const { userName, email, password, confirmedPassword } = req.body;
   if (nameValidator(res, userName, "userName")) {
     return;
   } else if (emailValidator(res, email, "email")) {
@@ -26,6 +26,11 @@ const userSignupController = (req, res) => {
   } else if (password.length < 8) {
     return res.status(StatusCodes.BAD_REQUEST).send({
       error: "Password Length Must Be Over 7 Char",
+      errorField: "password",
+    });
+  } else if (confirmedPassword !== password) {
+    return res.status(StatusCodes.BAD_REQUEST).send({
+      error: "Password & Confirmed Password not matched",
       errorField: "password",
     });
   }
@@ -54,7 +59,7 @@ const userSignupController = (req, res) => {
 
         await user.save().then(() =>
           res.status(StatusCodes.CREATED).send({
-            message: "Registration Successful, Verification Email Sent",
+            message: "Registration Successful!,Please Check Your Email!",
             userName: user.userName,
             email: user.email,
           })
@@ -143,9 +148,16 @@ const userLoginController = async (req, res) => {
 
     const match = await bcrypt.compare(password, existingUser.password);
     if (match) {
-      return res
-        .status(StatusCodes.OK)
-        .send({ message: "Successfully Logged In", user: existingUser.email });
+      return res.status(StatusCodes.OK).send({
+        message: "Successfully Logged In",
+        userData: {
+          userId: existingUser._id,
+          userName: existingUser.userName,
+          email: existingUser.email,
+          verified: existingUser.verified,
+          branch: branch,
+        },
+      });
     } else {
       return res
         .status(StatusCodes.BAD_REQUEST)

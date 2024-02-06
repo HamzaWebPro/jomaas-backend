@@ -27,6 +27,13 @@ const userSchema = new Schema(
     otp: {
       type: String,
     },
+
+    // orders: [
+    //   {
+    //     type: Schema.Types.ObjectId,
+    //     ref: "Order",
+    //   },
+    // ],
   },
 
   {

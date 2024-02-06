@@ -7,13 +7,13 @@ const nameValidator = (res, name, fieldName) => {
 
   if (!name) {
     res.status(StatusCodes.BAD_REQUEST).send({
-      error: `${capitaizidedName} Is Required`,
+      error: `${capitaizidedName} is Required`,
       errorField: fieldName,
     });
     return true;
   } else if (!namePattern.test(name)) {
     res.status(StatusCodes.BAD_REQUEST).send({
-      error: `Valid ${capitaizidedName} Is Required`,
+      error: `Valid ${capitaizidedName} is Required`,
       errorField: fieldName,
     });
     return true;
