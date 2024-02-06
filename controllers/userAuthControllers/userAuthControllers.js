@@ -30,8 +30,8 @@ const userSignupController = (req, res) => {
     });
   } else if (confirmedPassword !== password) {
     return res.status(StatusCodes.BAD_REQUEST).send({
-      error: "Password & Confirmed Password not matched",
-      errorField: "password",
+      error: "Confirmed Password Does Not Matched",
+      errorField: "confirmedPassword",
     });
   }
 
@@ -59,7 +59,7 @@ const userSignupController = (req, res) => {
 
         await user.save().then(() =>
           res.status(StatusCodes.CREATED).send({
-            message: "Registration Successful!,Please Check Your Email!",
+            message: "Registration Successful!, Please Check Your Email!",
             userName: user.userName,
             email: user.email,
           })
