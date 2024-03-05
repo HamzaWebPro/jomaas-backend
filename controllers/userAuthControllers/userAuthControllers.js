@@ -197,7 +197,7 @@ const userForgotPasswordController = async (req, res) => {
 
     return res
       .status(StatusCodes.OK)
-      .send({ message: "An OTP Code Sent To Your Email Address" });
+      .send({ message: "An OTP Code Sent To Your Email Address", email });
   } catch (error) {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({
       error: "Internal Server Error",
