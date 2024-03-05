@@ -243,7 +243,7 @@ const resetUserPasswordController = async (req, res) => {
     return;
   } else if (newPassword.length < 8) {
     return res.status(StatusCodes.BAD_REQUEST).send({
-      error: "At Lest 8 Char Required",
+      error: "At Lest 8 Character Required",
       errorField: "resetPassword",
     });
   } else if (!email) {
