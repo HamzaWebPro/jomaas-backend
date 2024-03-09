@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { Schema } = mongoose;
+const { Schema, model } = mongoose;
 
 const userSchema = new Schema(
   {
@@ -28,17 +28,16 @@ const userSchema = new Schema(
       type: String,
     },
 
-    // orders: [
-    //   {
-    //     type: Schema.Types.ObjectId,
-    //     ref: "Order",
-    //   },
-    // ],
+    orders: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Order",
+      },
+    ],
   },
-
   {
     timestamps: true,
   }
 );
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = model("User", userSchema);
