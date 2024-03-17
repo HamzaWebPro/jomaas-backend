@@ -69,7 +69,20 @@ const {
   deleteSpecialtyPasta,
   changeSpecialtyPastaStatus,
 } = require("../../controllers/add-menu-items-controllers/speciality-pasta");
-const { createSub, getSubs, updateSub, deleteSub, subAvailableStatus } = require("../../controllers/add-menu-items-controllers/sub");
+const {
+  createSub,
+  getSubs,
+  updateSub,
+  deleteSub,
+  subAvailableStatus,
+} = require("../../controllers/add-menu-items-controllers/sub");
+const {
+  createTwoForOnePizza,
+  getTwoForOnePizza,
+  updateTwoForOnePizza,
+  deleteTwoForOnePizza,
+  twoForOnePizzaAvailableStatus,
+} = require("../../controllers/add-menu-items-controllers/twoforonepizza");
 
 const _ = express.Router();
 
@@ -160,5 +173,11 @@ _.post("/updatesub", updateSub);
 _.post("/deletesub", deleteSub);
 _.post("/substatus", subAvailableStatus);
 // Sub routes end
+
+_.post("/twoforonepizza", createTwoForOnePizza);
+_.get("/gettwoforonepizza", getTwoForOnePizza);
+_.post("/updatetwoforonepizza", updateTwoForOnePizza);
+_.post("/deletetwoforonepizza", deleteTwoForOnePizza);
+_.post("/twoforonepizzastatus", twoForOnePizzaAvailableStatus);
 
 module.exports = _;
