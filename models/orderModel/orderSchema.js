@@ -27,6 +27,11 @@ const orderSchema = new Schema(
       ref: "User",
       required: true,
     },
+
+    deliveryMan: {
+      type: Schema.Types.ObjectId,
+      ref: "DeliveryMan",
+    },
   },
   {
     timestamps: true,
