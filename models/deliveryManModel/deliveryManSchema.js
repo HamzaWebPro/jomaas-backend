@@ -16,17 +16,6 @@ const deliveryManSchema = new Schema(
 
     branch: {
       type: String,
-      enum: {
-        values: [
-          "edmonton",
-          "thickwood",
-          "downtown",
-          "beacon hill",
-          "timberlea",
-        ],
-        message: "{VALUE} is not supported, Enter a valid branch name.",
-      },
-      required: [true, "Branch name is required"],
     },
 
     orders: [

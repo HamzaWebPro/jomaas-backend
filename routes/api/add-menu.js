@@ -83,6 +83,13 @@ const {
   deleteTwoForOnePizza,
   twoForOnePizzaAvailableStatus,
 } = require("../../controllers/add-menu-items-controllers/twoforonepizza");
+const {
+  createSauce,
+  getSauces,
+  updateSauce,
+  deleteSauce,
+  sauceAvailableStatus,
+} = require("../../controllers/add-menu-items-controllers/sauce");
 
 const _ = express.Router();
 
@@ -174,10 +181,20 @@ _.post("/deletesub", deleteSub);
 _.post("/substatus", subAvailableStatus);
 // Sub routes end
 
+// two for one piiza routes start
 _.post("/twoforonepizza", createTwoForOnePizza);
 _.get("/gettwoforonepizza", getTwoForOnePizza);
 _.post("/updatetwoforonepizza", updateTwoForOnePizza);
 _.post("/deletetwoforonepizza", deleteTwoForOnePizza);
 _.post("/twoforonepizzastatus", twoForOnePizzaAvailableStatus);
+// two for one pizza routes end
+
+// sauce rouites start
+_.post("/sauce", createSauce);
+_.get("/getsauce", getSauces);
+_.post("/updatesauce", updateSauce);
+_.post("/deletesauce", deleteSauce);
+_.post("/saucestatus", sauceAvailableStatus);
+// sauce routes end
 
 module.exports = _;
