@@ -1,103 +1,41 @@
-const { StatusCodes } = require("http-status-codes");
-const DeliveryMan = require("./../../models/deliveryManModel/deliveryManSchema");
-const nameValidator = require("../../utils/nameValidator");
-const phoneNumberValidator = require("../../utils/phoneNumberValidator");
+const DeliveryMan = require("../../models/deliveryManModel/deliveryManSchema");
 
-const createDeliveryManController = async (req, res) => {
+// Controller function to save a DeliveryMan item
+const createDeliveryMan = async (req, res) => {
   const { name, phone, branch } = req.body;
-  if (nameValidator(res, name, "name")) {
-    return;
-  } else if (phoneNumberValidator(res, phone)) {
-    return;
-  } else if (!branch) {
-    return res
-      .status(StatusCodes.BAD_REQUEST)
-      .json({ error: "Branch name is required" });
-  }
-
-  try {
-    const newDeliveryMan = new DeliveryMan({ name, phone, branch });
-    await newDeliveryMan.save();
-
-    res.status(StatusCodes.OK).json({
-      message: "Delivery man create successfully",
-      data: newDeliveryMan,
-    });
-  } catch (err) {
-    console.log(err);
-    return res
-      .status(StatusCodes.INTERNAL_SERVER_ERROR)
-      .json({ error: "Internal server error" });
-  }
+  const deliveryMan = new DeliveryMan({ name, phone, branch }) 
+  deliveryMan.save()
+    .then(() => res.json({ message: "Your DeliveryMan Item Successfully Created!!" }))
+    .catch(error => res.json({ message: "Error creating DeliveryMan. Please try again." }))
 };
 
-const getAllDeliveryManController = async (req, res) => {
-  try {
-    const allDeliveryMan = await DeliveryMan.find({}).select("-__v");
-    return res.status(StatusCodes.OK).json(allDeliveryMan);
-  } catch (err) {
-    console.log(err);
-    return res
-      .status(StatusCodes.INTERNAL_SERVER_ERROR)
-      .json({ error: "Internal server error" });
-  }
+// Read DeliveryMan items
+const getDeliveryMen = async (req, res) => {
+  DeliveryMan.find()
+    .then(deliveryMen => res.json(deliveryMen))
+    .catch(error => res.json({ message: "Error fetching DeliveryMen. Please try again." }));
 };
 
-const getADeliveryManController = async (req, res) => {
-  const { id } = req.params;
-  try {
-    const deliveryMan = await DeliveryMan.findOne({ _id: id }).select("-__v");
-    return res.status(StatusCodes.OK).json(deliveryMan);
-  } catch (err) {
-    console.log(err);
-    return res
-      .status(StatusCodes.INTERNAL_SERVER_ERROR)
-      .json({ error: "Internal server error" });
-  }
+// Update or edit DeliveryMan
+const updateDeliveryMan = async (req, res) => {
+  const { id, updatedDeliveryMan } = req.body;
+  DeliveryMan.findByIdAndUpdate(id, updatedDeliveryMan, { new: true })
+    .then(() => res.json({ message: "Your DeliveryMan Item Successfully Updated!!" }))
+    .catch(error => res.json({ message: "Error updating DeliveryMan. Please try again." }));
 };
 
-const updateDeliveryManController = async (req, res) => {
-  const { id } = req.params;
-  try {
-    const deliveryMan = await DeliveryMan.findOneAndUpdate(
-      { _id: id },
-      req.body,
-      {
-        new: true,
-        runValidators: true,
-      }
-    );
-    return res.status(StatusCodes.OK).json({
-      message: "Delivary man has been updated successfully",
-      deliveryMan,
-    });
-  } catch (err) {
-    console.log(err);
-    return res
-      .status(StatusCodes.INTERNAL_SERVER_ERROR)
-      .json({ error: "Internal server error" });
-  }
+// Delete DeliveryMan
+const deleteDeliveryMan = async (req, res) => {
+  const { id } = req.body;
+  DeliveryMan.findByIdAndDelete(id)
+    .then(() => res.json({ message: "Your DeliveryMan Item Successfully Deleted!!" }))
+    .catch(error => res.json({ message: "Error deleting DeliveryMan. Please try again." }));
 };
 
-const deleteDeliveryManController = async (req, res) => {
-  const { id } = req.params;
-  try {
-    await DeliveryMan.findOneAndDelete({ _id: id });
-    res.status(StatusCodes.NO_CONTENT).json({
-      message: "Delivary man has been deleted successfully",
-    });
-  } catch (err) {
-    console.log(err);
-    return res
-      .status(StatusCodes.INTERNAL_SERVER_ERROR)
-      .json({ error: "Internal server error" });
-  }
-};
 
 module.exports = {
-  createDeliveryManController,
-  getAllDeliveryManController,
-  getADeliveryManController,
-  updateDeliveryManController,
-  deleteDeliveryManController,
+  createDeliveryMan,
+  getDeliveryMen,
+  updateDeliveryMan,
+  deleteDeliveryMan,
 };

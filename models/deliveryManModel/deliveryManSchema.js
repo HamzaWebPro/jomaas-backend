@@ -5,13 +5,10 @@ const deliveryManSchema = new Schema(
   {
     name: {
       type: String,
-      required: [true, "Name is required for a delivery man"],
-      trim: true,
     },
 
     phone: {
-      type: String,
-      required: [true, "Phone number is required"],
+      type: Number,
     },
 
     branch: {
