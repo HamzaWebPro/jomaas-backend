@@ -9,18 +9,43 @@ const orderSchema = new Schema(
       enum: ["pickup", "delivery"],
     },
 
-    orderNow: {
-      type: Boolean,
-      default: false,
-    },
+    orderNumber: Number,
 
-    orderDate: Date,
+    orderType: {
+      type: String,
+      required: true,
+      enum: ["now", "later"],
+    },
 
     orderTime: String,
 
-    deliveryAddress: String,
+    storeAddress: String,
 
-    foods: Array,
+    orderPrice: {
+      type: String,
+      required: true,
+    },
+
+    orderLocation: String,
+    userName: {
+      type: String,
+      required: true,
+    },
+
+    email: String,
+    phone: {
+      type: String,
+      required: true,
+    },
+    orderNote: String,
+    payment: {
+      type: String,
+      required: true,
+    },
+    orderDetails: {
+      type: Array,
+      required: true,
+    },
 
     user: {
       type: Schema.Types.ObjectId,
@@ -37,23 +62,5 @@ const orderSchema = new Schema(
     timestamps: true,
   }
 );
-
-// MIDDLEWARES
-orderSchema.pre("save", function (next) {
-  if (this.service === "pickup") {
-    this.deliveryAddress = undefined;
-    if (this.orderNow === true) {
-      this.orderDate = Date.now();
-      this.orderTime = "now";
-    }
-  } else if (this.service === "delivery") {
-    if (this.orderNow === true) {
-      this.orderDate = Date.now();
-      this.orderTime = "now";
-    }
-  }
-
-  next();
-});
 
 module.exports = model("Order", orderSchema);
