@@ -18,6 +18,6 @@ app.use(
 );
 app.use(routes);
 app.use(notFoundMiddleware);
-
+ 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`SERVER IS RUNNING ON PORT ${port}`));

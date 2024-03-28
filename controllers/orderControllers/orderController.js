@@ -4,46 +4,114 @@ const User = require("../../models/userAuthModel/userRegisterModel");
 const createOrderController = async (req, res) => {
   const {
     service,
-    orderNow,
-    foods,
-    orderDate,
+    orderType,
+    orderPriceTax,
     orderTime,
-    deliveryAddress,
+    storeAddress,
+    orderPrice,
+    orderLocation,
+    userName,
+    email,
+    phone,
+    orderNote,
+    payment,
+    orderDetails,
     user,
   } = req.body;
 
-  if (!service) {
-    return res.status(400).json({ error: "Service is required" });
-  } else if (!user) {
-    return res.status(400).json({ error: "User is required" });
-  }
-
-  try {
+  if (service == "delivery" && orderType == "now") {
     const newOrder = new Order({
       service,
-      orderNow,
-      foods,
-      orderDate,
-      orderTime,
-      deliveryAddress,
+      orderType,
+      storeAddress,
+      orderPrice,
+      orderPriceTax,
+      orderLocation,
+      userName,
+      email,
+      phone,
+      orderNote,
+      payment,
+      orderDetails,
       user,
     });
 
-    await newOrder.save();
+    newOrder.save();
 
-    await User.findOneAndUpdate(
-      { _id: user },
-      { $push: { orders: newOrder } },
-      { new: true }
-    );
-
-    return res.status(200).json({
-      success: "Order created successfully",
+    res.send({
+      success: "Order Created Successfull.",
     });
-  } catch (err) {
-    console.log(err);
-    return res.status(500).json({
-      error: "Internal server error",
+  } else if (service == "delivery" && orderType == "later") {
+    const newOrder = new Order({
+      service,
+      orderType,
+      orderTime,
+      storeAddress,
+      orderPrice,
+      orderPriceTax,
+      orderLocation,
+      userName,
+      email,
+      phone,
+      orderNote,
+      payment,
+      orderDetails,
+      user,
+    });
+
+    newOrder.save();
+
+    res.send({
+      success: "Order Created Successfull.",
+    });
+  } else if (service == "pickup" && orderType == "now") {
+    const newOrder = new Order({
+      service,
+      orderType,
+      storeAddress,
+      orderPrice,
+      orderPriceTax,
+      orderLocation,
+      userName,
+      email,
+      phone,
+      orderNote,
+      payment,
+      orderDetails,
+      user,
+    });
+
+    newOrder.save();
+
+    res.send({
+      success: "Order Created Successfull.",
+    });
+  } else if (service == "pickup" && orderType == "later") {
+    const newOrder = new Order({
+      service,
+      orderType,
+      orderTime,
+      storeAddress,
+      orderPrice,
+      orderPriceTax,
+      orderLocation,
+      userName,
+      email,
+      phone,
+      orderNote,
+      payment,
+      orderDetails,
+      user,
+    });
+
+    newOrder.save();
+
+    res.send({
+      success: "Order Created Successfull.",
+    });
+  } else {
+    res.send({
+      error: "Order Created Failed.",
     });
   }
 };

@@ -26,6 +26,11 @@ const orderSchema = new Schema(
       required: true,
     },
 
+    orderPriceTax: {
+      type: String,
+      required: true,
+    },
+
     orderLocation: String,
     userName: {
       type: String,
