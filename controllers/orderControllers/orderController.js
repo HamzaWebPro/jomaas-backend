@@ -116,4 +116,14 @@ const createOrderController = async (req, res) => {
   }
 };
 
-module.exports = { createOrderController };
+const allOrderController = async (req, res) => { 
+
+  const allOrder = await Order.find({});
+
+  res.send({
+    data: allOrder
+  })
+
+ }
+
+module.exports = { createOrderController, allOrderController };
